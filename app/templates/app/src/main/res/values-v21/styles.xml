@@ -1,0 +1,12 @@
+<resources>
+
+	<style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+		<item name="android:colorPrimary">@color/primary</item>
+		<item name="android:colorPrimaryDark">@color/primary_dark</item>
+		<item name="android:colorAccent">@color/accent</item>
+
+		<!-- The rest of your attributes -->
+		<item name="android:windowBackground">@color/window_background</item>
+	</style>
+
+</resources>
