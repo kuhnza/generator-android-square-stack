@@ -1,7 +1,7 @@
 {
   "name": "generator-android-square-stack",
-  "version": "0.0.1",
-  "description": "Yeoman generator",
+  "version": "0.0.2",
+  "description": "Yeoman generator for Android+Square libs",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "kuhnza/generator-android-square-stack",
