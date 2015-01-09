@@ -9,6 +9,11 @@ import javax.inject.Inject;
 
 import com.cocosw.bottomsheet.BottomSheet;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
+import <%= appPackage %>.R;
+import <%= appPackage %>.SharedPreferencesKeys;
+import <%= appPackage %>.actionbar.ActionBarConfig;
+import <%= appPackage %>.actionbar.ActionBarOwner;
+import <%= appPackage %>.actionbar.MenuItemSelectionHandler;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -16,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -25,11 +31,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import <%= appPackage %>.R;
-import <%= appPackage %>.SharedPreferencesKeys;
-import <%= appPackage %>.actionbar.ActionBarConfig;
-import <%= appPackage %>.actionbar.ActionBarOwner;
-import <%= appPackage %>.actionbar.MenuItemSelectionHandler;
 import flow.Flow;
 import mortar.Mortar;
 import mortar.MortarActivityScope;
@@ -90,7 +91,7 @@ public class MainActivity extends ActionBarActivity implements ActionBarOwner.Vi
 
   @Override
   public void setActionBarConfig(ActionBarConfig config) {
-    ActionBar actionBar = getSupportActionBar();
+    final ActionBar actionBar = getSupportActionBar();
     if (actionBar == null) {
       return;
     }
@@ -98,11 +99,15 @@ public class MainActivity extends ActionBarActivity implements ActionBarOwner.Vi
     String title = config.getTitle();
     actionBar.setTitle(title != null ? title : getString(R.string.app_name));
 
-    if (config.isVisible()) {
+    if (config.isVisible() && !actionBar.isShowing()) {
       actionBar.show();
-      mainView.setPadding(0, actionBar.getHeight(), 0, 0);
-    } else {
+
+      // since actionbar is in overlay mode, set the container padding to compensate
+      mainView.setPadding(0, getActionBarHeight(), 0, 0);
+    } else if (!config.isVisible() && actionBar.isShowing()) {
       actionBar.hide();
+
+      // remove padding so we get full bleed when action bar is hidden
       mainView.setPadding(0, 0, 0, 0);
     }
 
@@ -195,6 +200,13 @@ public class MainActivity extends ActionBarActivity implements ActionBarOwner.Vi
     activityScope = Mortar.requireActivityScope(parentScope, new MainScreen());
     Mortar.inject(this, this);
     activityScope.onCreate(savedInstanceState);
+  }
+
+  private int getActionBarHeight() {
+    TypedArray styledAttributes = getTheme().obtainStyledAttributes(new int[] { android.R.attr.actionBarSize });
+    int height = (int) styledAttributes.getDimension(0, 0);
+    styledAttributes.recycle();
+    return height;
   }
 
   private class UpSelectionHandler implements MenuItemSelectionHandler {

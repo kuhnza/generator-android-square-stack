@@ -35,19 +35,4 @@ public abstract class BaseViewPresenter<V extends BaseView> extends Presenter<V>
 	protected MortarScope extractScope(V view) {
 		return Mortar.getScope(view.getContext());
 	}
-//
-//	/**
-//	 * Sets the title of the app toolbar.
-//	 *
-//	 * @param owner a reference to the {@link au.com.ingogonow.actionbar.ActionBarOwner}
-//	 * @param title the title to set
-//	 */
-//	protected void setAppToolbarTitle(ActionBarOwner owner, String title) {
-//		V view = getView();
-//		if (view == null) {
-//			return;
-//		}
-//
-//		owner.setConfig(new ActionBarConfig.Builder().title(title).build());
-//	}
 }
