@@ -98,13 +98,14 @@ module.exports = yeoman.generators.Base.extend({
 
       this.mkdir('app/src/androidTest/java/' + packageDir);
       this.templateDirectory('app/src/androidTest/java', 'app/src/androidTest/java/' + packageDir);
-      this.directory('app/src/androidTest/res', 'app/src/androidTest/res');
+      this.templateDirectory('app/src/androidTest/res', 'app/src/androidTest/res');
 
       this.mkdir('app/src/env_prod/java/' + packageDir);
       this.templateDirectory('app/src/env_prod/java', 'app/src/env_prod/java/' + packageDir);
 
       this.mkdir('app/src/env_test/java/' + packageDir);
       this.templateDirectory('app/src/env_test/java', 'app/src/env_test/java/' + packageDir);
+      this.templateDirectory('app/src/env_test/res', 'app/src/env_test/res');
 
       this.mkdir('app/src/main/assets');
       this.mkdir('app/src/main/java/' + packageDir);
