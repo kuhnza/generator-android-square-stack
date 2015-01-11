@@ -18,7 +18,7 @@ describe('android-square-stack:app', function () {
       .on('end', done);
   });
 
-  it('creates files', function () {
+  it('creates project files', function () {
     assert.file([
       '.gitignore',
       'build.gradle',
@@ -30,10 +30,20 @@ describe('android-square-stack:app', function () {
     ]);
   });
 
-  it('creates directories', function () {
-    assert.directory([
-      'app',
-      'gradle'
+  it('creates core app files', function () {
+    assert.file([
+      'app/.gitignore',
+      'app/build.gradle',
+      'app/proguard-rules.pro',
+      'app/src/main/AndroidManifest.xml',
+      'app/src/main/java/org/example/testapp/Application.java'
+    ]);
+  });
+
+  it('copies gradle wrapper', function () {
+    assert.file([
+      'gradle/wrapper/gradle-wrapper.jar',
+      'gradle/wrapper/gradle-wrapper.properties'
     ]);
   });
 });
