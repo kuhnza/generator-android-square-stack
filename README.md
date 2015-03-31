@@ -56,6 +56,10 @@ This will create a fully functioning Android app skeleton.
 
 Once you've generated the skeleton app simply import into Android Studio/IntelliJ (haven't tried with Eclipse & ADT sorry) as a Gradle project, perform a Gradle sync and then run! 
 
+### Credits
+
+Developed with the generous support of [![3WKS Logo](http://3wks.com.au/wp-content/themes/3wks/images/3wks_logo_2.png)](http://www.3wks.com.au)! 
+
 ## License
 
 MIT
