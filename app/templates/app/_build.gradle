@@ -27,12 +27,12 @@ android {
     }
     productFlavors {
         env_test {
-            packageName '<%= appPackage %>.test'
+            applicationId '<%= appPackage %>.test'
             versionCode 1
             versionName "1.0.0"
         }
         env_prod {
-            packageName '<%= appPackage %>'
+            applicationId '<%= appPackage %>'
             versionCode 1
             versionName "1.0.0"
         }
@@ -170,9 +170,15 @@ dependencies {
         exclude module: 'wagon-http-lightweight'
         exclude module: 'wagon-provider-api'
     }
-    androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0';
-    androidTestCompile 'com.squareup.assertj:assertj-android-support-v4:1.0.0'
-    androidTestCompile 'com.squareup.assertj:assertj-android-appcompat-v7:1.0.0'
+    androidTestCompile('com.squareup.assertj:assertj-android:1.0.0') {
+        exclude module: 'support-annotations'
+    }
+    androidTestCompile('com.squareup.assertj:assertj-android-support-v4:1.0.0') {
+        exclude module: 'support-annotations'
+    }
+    androidTestCompile('com.squareup.assertj:assertj-android-appcompat-v7:1.0.0') {
+        exclude module: 'support-annotations'
+    }
     androidTestCompile 'nl.jqno.equalsverifier:equalsverifier:1.5'
 }
 
